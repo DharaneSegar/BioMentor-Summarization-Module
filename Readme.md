@@ -72,7 +72,6 @@ Summarization/
 │   ├── voice_service.py
 │   ├── text_extraction_service.py
 │   ├── rag.py
-│   └── ...
 ├── Microservices-Architecture/
 │   ├── api_gateway/
 │   ├── file_service/
