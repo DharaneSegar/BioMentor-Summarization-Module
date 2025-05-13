@@ -96,12 +96,20 @@ Summarization/
 
 ---
 
+## ⚙️ Setup & Installation
+
+###  Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/BioMentor-Personalized-E-Learning-Platform.git
+```
+
 ## 🖥️ Running the Services
 
 ### ✅ Monolithic
 
 ```bash
-cd Monolithic-Architecture
+cd BioMentor-Personalized-E-Learning-Platform/Back-End/Summarization/Monolithic-Architecture
 python3.12 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -111,11 +119,12 @@ uvicorn summarization:app --host 0.0.0.0 --port 8002
 ### ⚙️ User Management
 
 ```bash
-cd ../User-Management/
+cd BioMentor-Personalized-E-Learning-Platform/Back-End/User-Management
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8001
+
 ```
 
 ### 🌐 Frontend
@@ -133,19 +142,49 @@ Ensure `.env` or config is set to communicate with APIs at ports 8001 and 8002.
 ## 🐳 Running with Microservices
 
 ```bash
-cd Microservices-Architecture
+cd BioMentor-Personalized-E-Learning-Platform/Back-End/Summarization/Microservices-Architecture
 docker-compose up --build
 ```
 
 ---
 
-## ⚙️ Deployment & CI/CD
+## 🛠️ Deployment (Azure)
 
-- Hosted on **Azure VM (Ubuntu 24.04)**
-- Managed via `systemd`
-- Nginx reverse proxy (port 80 → 8002)
-- GitHub Actions for CI/CD:
-  - On push to `main`: Pull, install, restart service
+- OS: Ubuntu 24.04 LTS
+- Port Rules: 8002 (API), 80 (Nginx)
+- Hosted on Azure VM with static IP
+- Managed using systemd (`summarize.service`)
+- Reverse proxy through Nginx
+
+## 🌐 Nginx Config
+
+```nginx
+server {
+    listen 80;
+    server_name <Your-VM-IP>;
+    location / {
+        proxy_pass http://127.0.0.1:8002;
+        proxy_read_timeout 600;
+        proxy_connect_timeout 600;
+    }
+}
+```
+
+## ⚙️ Systemd Service
+
+```ini
+[Service]
+WorkingDirectory=/home/azureuser/...
+ExecStart=/path/to/venv/bin/uvicorn summarization:app --host 0.0.0.0 --port 8002
+Restart=always
+```
+
+## 🔁 CI/CD (GitHub Actions)
+
+Triggered on push to `main`, auto-deploys to VM:
+- Pulls latest code
+- Installs dependencies
+- Restarts service
 
 ---
 
