@@ -26,3 +26,5 @@ deep_translator
 pytesseract
 pdf2image
 pytest
+google-api-python-client
+dotenv

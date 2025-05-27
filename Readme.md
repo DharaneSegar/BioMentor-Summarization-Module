@@ -9,12 +9,13 @@ A powerful, modular AI component designed for the **BioMentor Personalized E-Lea
 
 This module supports both **Monolithic** and **Microservices** architectures. It allows users to:
 
-- Upload educational documents
-- Generate intelligent summaries using a fine-tuned LLM
-- Retrieve answers to biology-related queries (RAG-based)
-- Create structured revision notes
-- Convert summaries to audio
-- Download outputs as PDF and MP3
+- 📂 Upload biology-related documents (PDF, DOCX, PPTX, TXT)
+- ✂️ Generate concise summaries using a fine-tuned Flan-T5 model with RAG
+- 🧩 Get structured revision notes with headings and bullet points
+- 🔊 Convert summaries into speech (MP3)
+- 🧠 Extract core topic keywords and definitions
+- 📺 Recommend YouTube videos for deeper understanding
+- 📄 Export summaries and notes as PDF files
 
 ---
 
@@ -84,15 +85,17 @@ Summarization/
 
 ## 🔌 API Endpoints (Monolith)
 
-| Endpoint                    | Method | Description |
-|----------------------------|--------|-------------|
-| `/process-document/`       | POST   | Summarize a file |
-| `/process-query/`          | POST   | Query-based summary |
-| `/summarize-text/`         | POST   | Plain text summary |
-| `/generate-notes/`         | POST   | Structured notes |
-| `/download-summary-text/`  | GET    | Download summary PDF |
-| `/download-summary-audio/` | GET    | Download MP3 |
-| `/download-notes/`         | GET    | Download notes PDF |
+| Endpoint                    | Method | Description                          |
+|----------------------------|--------|--------------------------------------|
+| `/process-document/`       | POST   | Upload document for summarization    |
+| `/process-query/`          | POST   | Submit biology query for summary     |
+| `/summarize-text/`         | POST   | Summarize raw input text             |
+| `/generate-notes/`         | POST   | Generate structured notes            |
+| `/concept-breakdown/`         | GET    | Get biology definition of keyword    |
+| `/concept-videos/`         | GET    | Get related YouTube videos           |
+| `/download-summary-text/`  | GET    | Download summary as PDF              |
+| `/download-summary-audio/` | GET    | Download summary as MP3              |
+| `/download-notes/`         | GET    | Download notes as PDF                |
 
 ---
 
